@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+name="sowmiya"
+if [ "$name" = "sowmiya" ]; then
+        echo "String is equal"
+else
+        echo "String is not equal"
+fi
+
+for x in {1..6}; do
+        echo "Hii $x time"
+done
+
+count=1
+while [ $count -le 6 ]; do
+        echo "count is $count"
+        ((count++))
+done
+function people() {
+        echo "hii, $1"
+}
+people "Vid"
+echo "Script name: $0"
+echo "first parameter: $1"
+echo "Total no of parameter: $#"
+echo "All parameters as a single word: $*"
+echo "All parameters as a  separate word: $@"
+
+string="may god"
+echo ${string:3}
+echo ${string:2:5}
+echo ${string#*a}
+echo ${string%a*}
+
+if [ -f "nee" ]; then
+        echo "file is exists"
+else
+        echo "file doesn't exists"
+fi
+
+if [ -d "new" ]; then
+        echo "directory exists"
+else
+        echo "directory doesn't exists"
+fi
+echo "Hello People" > file1
+
+if cp file1 nee; then
+        echo "copy succeeded"
+else
+        echo "copy failed"
+fi
+
+rm file1
+
+if cp file1 nee; then
+        echo "copy succeeded"
+else
+        echo "copy failed"
+fi
+
+#array
+array=(lion tiger giraffe cheetah deer)
+echo ${array[2]}
+echo $array
+
+
+#to add element in array
+array+=(rhino elephant zebra monkey)
+echo ${array[5]}
+for animals in "${array[@]}"; do
+        echo $animals
+done
+
+declare -A assoc_array
+assoc_array[name]="Nagalakshmi"
+assoc_array[age]="22"
+assoc_array[gender]="Female"
+echo ${assoc_array[age]}
+for key in "${!assoc_array[@]}"; do
+        echo "$key: ${assoc_array[$key]}"
+done
+
+
