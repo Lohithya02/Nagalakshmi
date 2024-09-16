@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daloft-Dashboard</title>
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC56M3hM9y_H0AYLp2JTnyYbeyGDZ87am8&libraries=places"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- For navigation -->
+            <ul class="navigation">
+                <li class="nav-item">
+                    <a href="services.html">
+                        <img src="services.png" alt="Services">
+                    </a>
+                    <a href="services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="teams.html">
+                        <img src="teams.png" alt="Teams">
+                    </a>
+                    <a href="teams.html">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a href="planner.html">
+                        <img src="planner.png" alt="Planner">
+                    </a>
+                    <a href="planner.html">Planner</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="dashboard.html">
+                        <img src="dashboard.png" alt="Dashboard">
+                    </a>
+                    <a href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html">
+                        <img src="settings.png" alt="Settings">
+                    </a>
+                    <a href="settings.html">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a href="help.html">
+                        <img src="help.png" alt="Help">
+                    </a>
+                    <a href="help.html">Help</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <img src="logo.png" alt="Logo of Daloft" class="header-logo">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <input type="text" name="" placeholder="Search">
+                    </div>
+                    <div class="message">
+                        <a href="message.html">
+                            <img src="message.png" alt="Inbox">
+                        </a>
+                        <a href="message.html">Inbox</a>
+                    </div>
+                    <div class="profile-container">
+                        <span class="employee-name">Employee Name</span> <!-- Employee name on the left -->
+                        <div class="profile-img-container">
+                            <img src="profile.png" alt="Profile" class="profile-img">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </header>
+
+            <!-- Main Section -->
+            <section class="dashboard">
+                <input id="autocomplete" type="text">
+                <div id="map" class="map" >
+                    <script>
+                        function initMap() {
+                          var map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: -33.8688, lng: 151.2195 },
+                            zoom: 13,
+                          });
+                    
+                          var input = document.getElementById('autocomplete');
+                          var autocomplete = new google.maps.places.Autocomplete(input);
+                          autocomplete.bindTo('bounds', map);
+                    
+                          var infowindow = new google.maps.InfoWindow();
+                          var marker = new google.maps.Marker({ map: map });
+                    
+                          autocomplete.addListener('place_changed', function () {
+                            infowindow.close();
+                            marker.setVisible(false);
+                            var place = autocomplete.getPlace();
+                            if (!place.geometry) {
+                              window.alert("No details available for input: '" + place.name + "'");
+                              return;
+                            }
+                            if (place.geometry.viewport) {
+                              map.fitBounds(place.geometry.viewport);
+                            } else {
+                              map.setCenter(place.geometry.location);
+                              map.setZoom(17);
+                            }
+                            marker.setPosition(place.geometry.location);
+                            marker.setVisible(true);
+                          });
+                        }
+                        window.onload = initMap;
+                    </script>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
